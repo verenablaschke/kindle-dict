@@ -1,5 +1,6 @@
 Since Kindle e-readers unfortunately don't come with any Norwegian (Bokmål) dictionaries, here is a simple way for creating one based on [dict.cc](deno.dict.cc) data.
-The resulting dictionary contains ca. 24.800 NB > DE entries and can be used like any other Kindle dictionary.
+The resulting dictionary can be used like any other Kindle dictionary.
+It contains ca. 24.800 uninflected NB > DE entries plus (regularly) inflected forms for most verbs, nouns and adjectives.
 
 With slight changes, these files can be used to create other bilingual dictionaries based on [other dict.cc language pairs](https://browse.dict.cc/).
 
@@ -25,7 +26,7 @@ Note that this only allows you to view the dictionary as if it were a regular bo
 You may need to restart the device afterwards (especially if you are updating the dictionary).
 
 
-To uninstall, go to `documents/dictionaries/` and delete `NB_DE_dict.mobi` as well as `NB_DE_dict.spr\`.
+To uninstall, go to `documents/dictionaries/` and delete `NB_DE_dict.mobi` as well as `NB_DE_dict.sdr/`.
 
 
 # Files
@@ -49,12 +50,14 @@ entry {gender} <comment> [comment]
 # Features / To Do
 
 - [ ] Generate inflections (nouns, adjectives, verbs).
-  - [ ] regular inflections
-  - [ ] irregular inflections
+  - [x] Regular inflections
+  - [ ] Irregular inflections
+  - [ ] Multi-token entries
 - [ ] Deal with parentheses and ellipses in Norwegian entries.
-- [x] Merge entries for identical Norwegian words (e.g. 'blomsterbutikk').
+- [x] Merge entries for identical Norwegian words (e.g. `blomsterbutikk`).
+  - [ ] Extend this to `[kvinnelig]` entries.
 - [ ] Deal with phrases/sentences?
-- [ ] Deal with complex entries such as 'dråpen {m} som fikk begeret til å renne over (sjelden: flyte over)'.
+  - [ ] Deal with complex entries such as `dråpen {m} som fikk begeret til å renne over (sjelden: flyte over)`.
 
 
 # References

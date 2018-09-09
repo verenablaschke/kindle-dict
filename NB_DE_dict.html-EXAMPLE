@@ -21,9 +21,9 @@ xmlns:idx="https://kindlegen.s3.amazonaws.com/AmazonKindlePublishingGuidelines.p
                 <idx:orth value="test">
                     <b>test</b>
                     <idx:infl>
-                        <idx:iform value="testen"></idx:iform>
-                        <idx:iform value="tester"></idx:iform>
-                        <idx:iform value="testene"></idx:iform>
+                        <idx:iform value="testen"/>
+                        <idx:iform value="tester"/>
+                        <idx:iform value="testene"/>
                     </idx:infl>
                 </idx:orth>
                 <p>Test</p>
