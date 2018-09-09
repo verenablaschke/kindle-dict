@@ -17,7 +17,7 @@ xmlns:idx="https://kindlegen.s3.amazonaws.com/AmazonKindlePublishingGuidelines.p
     <mbp:frameset>
         <idx:entry name="Norwegian" scriptable="yes" spell="yes">
             <idx:short>
-                <a id="1"></a>
+                <a id="1"/>
                 <idx:orth value="test">
                     <b>test</b>
                     <idx:infl>
@@ -31,7 +31,7 @@ xmlns:idx="https://kindlegen.s3.amazonaws.com/AmazonKindlePublishingGuidelines.p
         </idx:entry>
         <idx:entry name="Norwegian" scriptable="yes" spell="yes">
             <idx:short>
-                <a id="2"></a>
+                <a id="2"/>
                 <idx:orth value="velkommen">
                     <b>vel•kommen</b>
                 </idx:orth>
