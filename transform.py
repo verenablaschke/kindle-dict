@@ -1,6 +1,7 @@
 import csv
 import re
 from regular_inflector import RegularInflector
+from spraakbank_inflector import SpraakbankInflector
 
 # XHTML necessary for MOBI conversion
 print('<html')
@@ -56,7 +57,8 @@ with open('data/dict.cc/dict.cc.tsv', encoding='utf8') as f:
 # Capture {comment}, <comment>, [comment].
 regex = re.compile(r"(\s{.*}\s?)?(\s<.*>\s?)?(\s\[.*\]\s?)?$")
 
-inflector = RegularInflector()
+# inflector = RegularInflector()
+inflector = SpraakbankInflector()
 
 
 def idx_entry(nb, de, pos, idx):
@@ -74,10 +76,12 @@ def idx_entry(nb, de, pos, idx):
 
     # Inflected forms.
     if pos:
-        print('\t\t\t<idx:infl>')
-        for infl in inflector.inflect(nb_word, nb_comment, pos):
-            print('\t\t\t\t<idx:iform value="{}"/>'.format(infl))
-        print('\t\t\t</idx:infl>')
+        inflections = inflector.inflect(nb_word, nb_comment, pos)
+        if inflections:
+            print('\t\t\t<idx:infl>')
+            for infl in inflections:
+                print('\t\t\t\t<idx:iform value="{}"/>'.format(infl))
+            print('\t\t\t</idx:infl>')
 
     print('\t\t</idx:orth>')
     print('\t\t<p>{}</p>'.format(de))

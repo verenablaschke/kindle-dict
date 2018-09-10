@@ -2,12 +2,14 @@
 <package xmlns="http://www.idpf.org/2007/opf" version="2.0" unique-identifier="BookId">
 
 <metadata xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:opf="http://www.idpf.org/2007/opf">
+    <!-- Title and language. -->
     <dc:title>Norsk (bokmål) → Deutsch</dc:title>
     <dc:language>nb</dc:language>
     <meta name="cover" content="My_Cover" />
 </metadata>
 
 <manifest>
+    <!-- Specify the names of the HTML file(s) and the cover image (JPEG or GIF). -->
     <item id="item1" media-type="application/xhtml+xml" href="NB_DE_dict.html"></item>
     <item id="My_Cover" media-type="image/jpeg" href="NB_DE_dict.jpeg"/>
 </manifest>
@@ -20,6 +22,7 @@
 <!-- Necessary for creating dictionaries.
 https://s3.amazonaws.com/kindlegen/AmazonKindlePublishingGuidelines.pdf#page=71 -->
 <x-metadata>
+    <!-- Specify the dictionary I/O languages. -->
     <DictionaryInLanguage>nb</DictionaryInLanguage>
     <DictionaryOutLanguage>de</DictionaryOutLanguage>
     <DefaultLookupIndex>Norwegian</DefaultLookupIndex>
