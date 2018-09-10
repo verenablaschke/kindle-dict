@@ -1,4 +1,4 @@
-Since Kindle e-readers unfortunately don't come with any Norwegian (Bokmål) dictionaries, here is a simple way for creating one based on [dict.cc](deno.dict.cc) data.
+Since Kindle ebook readers unfortunately don't come with any Norwegian (Bokmål) dictionaries, here is a simple way for creating one based on [dict.cc](deno.dict.cc) data.
 The resulting dictionary can be used like any other Kindle dictionary.
 It contains ca. 24.800 uninflected NB > DE entries plus (regularly and irregularly) inflected forms for most verbs, nouns and adjectives.
 
@@ -6,14 +6,17 @@ With slight changes, these files can be used to create other bilingual dictionar
 
 # Creating and Installing the Dictionary
 
-1. Get the source data from www1.dict.cc/translation_file_request.php and save it as `data/dict.cc_no_de.tsv`.
+1. Get the dictionary source data from www1.dict.cc/translation_file_request.php and save it as `data/dict.cc/dict.cc.tsv`.
 
-2. Convert the TSV file into an appropriately formatted HTML file:
+2. Get the files `lemma.txt` and `fullformsliste.txt` from [Språkbankens ressurskatalog](https://www.nb.no/sprakbanken/show?serial=oai%3Anb.no%3Asbr-5) and save them in `data/spraakbanken/`.
+If, **instead** you would only like to use automatically generated regular inflection forms, open [`transform.py`](/transform.py) and change `inflector = SpraakbankenInflector()` to `inflector = RegularInflector()`.
+
+3. Convert the TSV file into an appropriately formatted HTML file:
 ```
 python transform.py > NB_DE_dict.html
 ```
 
-3. Install [KindleGen](https://www.amazon.com/gp/feature.html?docId=1000765211) and use it to convert the dictionary into a `MOBI` file. The conversion requires the following files:
+4. Install [KindleGen](https://www.amazon.com/gp/feature.html?docId=1000765211) and use it to convert the dictionary into a `MOBI` file. The conversion requires the following files:
 
 - `NB_DE_dict.opf`: Contains information on the files used for `MOBI` conversion and general metadata about the dictionary.
 - `NB_DE_dict.html`: Contains the actual dictionary entries.
@@ -23,16 +26,16 @@ python transform.py > NB_DE_dict.html
 kindlegen.exe NB_DE_dict.opf -c2 -verbose -dont_append_source
 ```
 
-4. (Optional) Use the [Kindle Previewer](https://www.amazon.com/gp/feature.html/?docId=1000765261) to preview the dictionary.
+5. (Optional) Use the [Kindle Previewer](https://www.amazon.com/gp/feature.html/?docId=1000765261) to preview the dictionary.
 Note that this only allows you to view the dictionary as if it were a regular book, but you unfortunately cannot try it out on an actual book in preview mode.
 
-5. Copy the `MOBI` file to the directory `documents/dictionaries/` on your Kindle.
+6. Copy the `MOBI` file to the directory `documents/dictionaries/` on your Kindle.
 You may need to restart the device afterwards (especially if you are updating the dictionary).
 
 
 To uninstall, go to `documents/dictionaries/` and delete `NB_DE_dict.mobi` as well as `NB_DE_dict.sdr/`.
 
-# Building Dictionaries for Other Languages
+## Building Dictionaries for Other Languages
 
 1. In the [`OPF`](/NB_DE_dict.opf) file, update the dictionary title, languages and all relevant file names.
 
@@ -50,15 +53,17 @@ To uninstall, go to `documents/dictionaries/` and delete `NB_DE_dict.mobi` as we
   - [ ] Multi-token entries
 - [ ] Deal with parentheses and ellipses in Norwegian entries.
 - [x] Merge entries for identical Norwegian words (e.g. `blomsterbutikk`).
-  - [ ] Extend this to `[kvinnelig]` entries.
+  - [x] Extend this to `[kvinnelig]` entries.
 - [ ] Deal with phrases/sentences?
   - [ ] Deal with complex entries such as `dråpen {m} som fikk begeret til å renne over (sjelden: flyte over)`.
 
 
 # References and Data
 
-- [Dict.cc data](https://www1.dict.cc/translation_file_request.php)
-- [Norsk Ordbank in Norwegian Bokmål 2005](https://www.nb.no/sprakbanken/show?serial=oai%3Anb.no%3Asbr-5)
+- [Dict.cc data](https://www1.dict.cc/translation_file_request.php).
+NB > DE translation data.
+- [Norsk Ordbank in Norwegian Bokmål 2005](https://www.nb.no/sprakbanken/show?serial=oai%3Anb.no%3Asbr-5) (Språkbankens ressurskatalog).
+Lists of Norwegian lemmas and inflected forms.
 - [Amazon Kindle Publishing Guidelines](https://s3.amazonaws.com/kindlegen/AmazonKindlePublishingGuidelines.pdf).
 This document describes how to create files that can be converted into `MOBI` files.
 There is also a [section on creating dictionaries](https://s3.amazonaws.com/kindlegen/AmazonKindlePublishingGuidelines.pdf#page=71).

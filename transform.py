@@ -1,7 +1,7 @@
 import csv
 import re
 from regular_inflector import RegularInflector
-from spraakbank_inflector import SpraakbankInflector
+from spraakbanken_inflector import SpraakbankenInflector
 
 # XHTML necessary for MOBI conversion
 print('<html')
@@ -27,6 +27,7 @@ print('</head>')
 print('<body>')
 print('<mbp:frameset>')
 
+# Read the dict.cc entries.
 entries = {}
 with open('data/dict.cc/dict.cc.tsv', encoding='utf8') as f:
     reader = csv.reader(f, delimiter='\t')
@@ -34,6 +35,7 @@ with open('data/dict.cc/dict.cc.tsv', encoding='utf8') as f:
         if len(row) < 2 or row[0].startswith('#'):
             continue
         nb = row[0].strip()
+        nb = nb.replace(' [kvinnelig]', '')
         de = row[1].strip()
 
         # If available, get additional information (POS tag, usage comments).
@@ -48,6 +50,7 @@ with open('data/dict.cc/dict.cc.tsv', encoding='utf8') as f:
         except IndexError:
             pass
 
+        # Add the entry.
         # Merge entries for the same word.
         try:
             entries[(nb, pos)] += ', ' + de
@@ -58,9 +61,10 @@ with open('data/dict.cc/dict.cc.tsv', encoding='utf8') as f:
 regex = re.compile(r"(\s{.*}\s?)?(\s<.*>\s?)?(\s\[.*\]\s?)?$")
 
 # inflector = RegularInflector()
-inflector = SpraakbankInflector()
+inflector = SpraakbankenInflector()
 
 
+# Write the entries.
 def idx_entry(nb, de, pos, idx):
     print('<idx:entry name="Norwegian" scriptable="yes" spell="yes">')
     print('\t<idx:short><a id="{}"/>'.format(idx))
@@ -94,6 +98,6 @@ for (nb, pos), de in sorted(entries.items()):
     idx_entry(nb, de, pos, idx)
     idx += 1
 
-
+# Close open HTML tags.
 print('</mbp:frameset>')
 print('</body>')
