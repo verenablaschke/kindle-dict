@@ -3,6 +3,10 @@ import re
 from regular_inflector import RegularInflector
 from spraakbanken_inflector import SpraakbankenInflector
 
+
+EXACT_MATCH_CHARS = ['Å', 'å', 'Ø', 'ø', 'Æ', 'æ']
+EXACT_MATCH_STR = ' exact="yes"'
+
 # XHTML necessary for MOBI conversion
 print('<html')
 print('xmlns:math="http://exslt.org/math"')
@@ -60,8 +64,8 @@ with open('data/dict.cc/dict.cc.tsv', encoding='utf8') as f:
 # Capture {comment}, <comment>, [comment].
 regex = re.compile(r"(\s{.*}\s?)?(\s<.*>\s?)?(\s\[.*\]\s?)?$")
 
-# inflector = RegularInflector()
-inflector = SpraakbankenInflector()
+inflector_reg = RegularInflector()
+inflector_spr = SpraakbankenInflector()
 
 
 # Write the entries.
@@ -75,16 +79,33 @@ def idx_entry(nb, de, pos, idx):
     else:
         nb_word = nb
         nb_comment = ""
-    print('\t\t<idx:orth value="{}">'.format(nb_word))
+    # If the entry contains special characters, try to make sure they are taken
+    # into account when the word is being looked up.
+    # (Not entirely sure how much this is actually taken into consideration
+    # when using the dictionary.)
+    exact_match = False
+    for c in nb_word:
+        if c in EXACT_MATCH_CHARS:
+            exact_match = True
+            break
+    print('\t\t<idx:orth value="{}"{}>'
+          .format(nb_word,
+                  EXACT_MATCH_STR if exact_match else ''))
     print('\t\t\t<b>{}</b>{} {}'.format(nb_word, nb_comment, pos))
 
     # Inflected forms.
     if pos:
-        inflections = inflector.inflect(nb_word, nb_comment, pos)
+        inflections = inflector_spr.inflect(nb_word, nb_comment, pos)
+        # If it's not in the Språkbanken file, generate regularly inflected
+        # forms:
+        if not inflections:
+            inflections = inflector_reg.inflect(nb_word, nb_comment, pos)
         if inflections:
             print('\t\t\t<idx:infl>')
             for infl in inflections:
-                print('\t\t\t\t<idx:iform value="{}"/>'.format(infl))
+                print('\t\t\t\t<idx:iform value="{}"{}/>'
+                      .format(infl,
+                              EXACT_MATCH_STR if exact_match else ''))
             print('\t\t\t</idx:infl>')
 
     print('\t\t</idx:orth>')

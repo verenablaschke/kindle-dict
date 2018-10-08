@@ -33,6 +33,9 @@ Note that this only allows you to view the dictionary as if it were a regular bo
 You may need to restart the device afterwards (especially if you are updating the dictionary).
 
 
+If you are using Windows, you can execute steps 3 and 4 at once by running [`run.bat`](/run.bat). 
+
+
 To uninstall, go to `documents/dictionaries/` and delete `NB_DE_dict.mobi` as well as `NB_DE_dict.sdr/`.
 
 ## Building Dictionaries for Other Languages
@@ -48,8 +51,8 @@ To uninstall, go to `documents/dictionaries/` and delete `NB_DE_dict.mobi` as we
 # Features / To Do
 
 - [ ] Generate inflections (nouns, adjectives, verbs).
-  - [x] Regular inflections
-  - [x] Irregular inflections
+  - [x] Regular inflections (from Språkbanken where available, otherwise generated according to regular inflection paradigms)
+  - [x] Irregular inflections (from Språkbanken's list)
   - [ ] Multi-token entries
 - [ ] Deal with parentheses and ellipses in Norwegian entries.
 - [x] Merge entries for identical Norwegian words (e.g. `blomsterbutikk`).
