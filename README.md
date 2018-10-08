@@ -6,17 +6,19 @@ With slight changes, these files can be used to create other bilingual dictionar
 
 # Creating and Installing the Dictionary
 
-1. Get the dictionary source data from www1.dict.cc/translation_file_request.php and save it as `data/dict.cc/dict.cc.tsv`.
+1. Get the dictionary source data from [dict.cc's download page](www1.dict.cc/translation_file_request.php) and save it as `data/dict.cc/dict.cc.tsv`.
 
 2. Get the files `lemma.txt` and `fullformsliste.txt` from [Språkbankens ressurskatalog](https://www.nb.no/sprakbanken/show?serial=oai%3Anb.no%3Asbr-5) and save them in `data/spraakbanken/`.
 If, **instead** you would only like to use automatically generated regular inflection forms, open [`transform.py`](/transform.py) and change `inflector = SpraakbankenInflector()` to `inflector = RegularInflector()`.
 
-3. Convert the TSV file into an appropriately formatted HTML file:
+3. Get a list of Bokmål stop words (for instance via [ranks.nl](https://www.ranks.nl/stopwords/norwegian)) and save it as `data/stopwords/stopwords.txt` (one word per line).
+
+4. Convert the TSV file into an appropriately formatted HTML file:
 ```
 python transform.py > NB_DE_dict.html
 ```
 
-4. Install [KindleGen](https://www.amazon.com/gp/feature.html?docId=1000765211) and use it to convert the dictionary into a `MOBI` file. The conversion requires the following files:
+5. Install [KindleGen](https://www.amazon.com/gp/feature.html?docId=1000765211) and use it to convert the dictionary into a `MOBI` file. The conversion requires the following files:
 
 - `NB_DE_dict.opf`: Contains information on the files used for `MOBI` conversion and general metadata about the dictionary.
 - `NB_DE_dict.html`: Contains the actual dictionary entries.
@@ -26,14 +28,14 @@ python transform.py > NB_DE_dict.html
 kindlegen.exe NB_DE_dict.opf -c2 -verbose -dont_append_source
 ```
 
-5. (Optional) Use the [Kindle Previewer](https://www.amazon.com/gp/feature.html/?docId=1000765261) to preview the dictionary.
+6. (Optional) Use the [Kindle Previewer](https://www.amazon.com/gp/feature.html/?docId=1000765261) to preview the dictionary.
 Note that this only allows you to view the dictionary as if it were a regular book, but you unfortunately cannot try it out on an actual book in preview mode.
 
-6. Copy the `MOBI` file to the directory `documents/dictionaries/` on your Kindle.
+7. Copy the `MOBI` file to the directory `documents/dictionaries/` on your Kindle.
 You may need to restart the device afterwards (especially if you are updating the dictionary).
 
 
-If you are using Windows, you can execute steps 3 and 4 at once by running [`run.bat`](/run.bat). 
+If you are using Windows, you can execute steps 4 and 5 at once by running [`run.bat`](/run.bat). 
 
 
 To uninstall, go to `documents/dictionaries/` and delete `NB_DE_dict.mobi` as well as `NB_DE_dict.sdr/`.
@@ -53,12 +55,13 @@ To uninstall, go to `documents/dictionaries/` and delete `NB_DE_dict.mobi` as we
 - [ ] Generate inflections (nouns, adjectives, verbs).
   - [x] Regular inflections (from Språkbanken where available, otherwise generated according to regular inflection paradigms)
   - [x] Irregular inflections (from Språkbanken's list)
+  - [ ] Genitive forms
   - [ ] Multi-token entries
 - [ ] Deal with parentheses and ellipses in Norwegian entries.
 - [x] Merge entries for identical Norwegian words (e.g. `blomsterbutikk`).
   - [x] Extend this to `[kvinnelig]` entries.
-- [ ] Deal with phrases/sentences?
-  - [ ] Deal with complex entries such as `dråpen {m} som fikk begeret til å renne over (sjelden: flyte over)`.
+- [x] Show relevant multi-token entries when looking up single-token entries (e.g. the entry for `blå` (blue) also contains information on the phrase `å være i det blå` (to be in the dark), which is also a distinct entry).
+  - I don't check for POS tags when creating these references; therefore, there are some false positives here. Since I find them quite interesting, I don't plan on refining this.
 
 
 # References and Data

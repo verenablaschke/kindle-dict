@@ -30,10 +30,11 @@ class SpraakbankenInflector(Inflector):
                     self.lemma2inflections[key] = {val}
                 # TODO genitive
 
-    def inflect(self, nb_word, nb_comment, pos):
-        if pos == '(verb)' and nb_word.startswith('å '):
+    def inflect(self, entry):
+        nb_word = entry.nb_word
+        if entry.pos == '(verb)' and nb_word.startswith('å '):
             nb_word = nb_word.replace('å ', '')
         try:
-            return self.lemma2inflections[(nb_word, POS2TAG[pos])]
+            return self.lemma2inflections[(nb_word, POS2TAG[entry.pos])]
         except KeyError:
             return set()

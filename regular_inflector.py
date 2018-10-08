@@ -6,13 +6,13 @@ VOWELS = ['a', 'e', 'i', 'o', 'u', 'y', 'å', 'æ', 'ø']
 
 class RegularInflector(Inflector):
 
-    def inflect(self, nb_word, nb_comment, pos):
-        if pos == '(noun)':
-            return self.inflect_noun(nb_word, nb_comment)
-        if pos == '(verb)':
-            return self.inflect_verb(nb_word)
-        if pos == '(adj)':
-            return self.inflect_adj(nb_word)
+    def inflect(self, entry):
+        if entry.pos == '(noun)':
+            return self.inflect_noun(entry.nb_word, entry.nb_comment)
+        if entry.pos == '(verb)':
+            return self.inflect_verb(entry.nb_word)
+        if entry.pos == '(adj)':
+            return self.inflect_adj(entry.nb_word)
         return set()
 
     def inflect_noun(self, nb_word, nb_comment):
