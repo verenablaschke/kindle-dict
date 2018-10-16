@@ -1,8 +1,8 @@
 Since Kindle ebook readers unfortunately don't come with any Norwegian (Bokmål) dictionaries, here is a simple way for creating one based on [dict.cc](deno.dict.cc) data.
-The resulting dictionary can be used like any other Kindle dictionary.
+The resulting dictionary can be used like any other Kindle dictionary (in-document word look-up (also of inflected forms), vocabulary trainer, browsing the dictionary).
 It contains ca. 24.800 uninflected NB > DE entries plus (regularly and irregularly) inflected forms for most verbs, nouns and adjectives.
 
-With slight changes, these files can be used to create other bilingual dictionaries based on [other dict.cc language pairs](https://browse.dict.cc/).
+With slight changes, these files can be used to create bilingual dictionaries based on [other dict.cc language pairs](https://browse.dict.cc/).
 
 # Creating and Installing the Dictionary
 
@@ -56,12 +56,17 @@ To uninstall, go to `documents/dictionaries/` and delete `NB_DE_dict.mobi` as we
   - [x] Regular inflections (from Språkbanken where available, otherwise generated according to regular inflection paradigms)
   - [x] Irregular inflections (from Språkbanken's list)
   - [ ] Genitive forms
-  - [ ] Multi-token entries
+  - [ ] Multi-token entries (in particular: phrasal verbs)
 - [ ] Deal with parentheses and ellipses in Norwegian entries.
 - [x] Merge entries for identical Norwegian words (e.g. `blomsterbutikk`).
   - [x] Extend this to `[kvinnelig]` entries.
 - [x] Show relevant multi-token entries when looking up single-token entries (e.g. the entry for `blå` (blue) also contains information on the phrase `å være i det blå` (to be in the dark), which is also a distinct entry).
   - I don't check for POS tags when creating these references; therefore, there are some false positives here. Since I find them quite interesting, I don't plan on refining this.
+- [ ] Extend the dictionary.
+  - Note: Unless compound nouns are in the dictionary, it's not possible to look them (or their constituents) up. Since I cannot change the way the dictionary is used to look up entries, there is not much I can do.
+  - [ ] Look into adding Wiktionary data. Specifically from the English or Norwegian versions of Wiktionary.
+  - The best (monolingual) Norwegian dictionary I know is https://ordbok.uib.no/, whose database I unfortunately cannot download and use. But maybe there are other good monolingual dictionaries out there that I can use?
+  - Written Danish and Bokmål are very similar. If I can find a large DA>EN or DA>DE dictionary, it could be worth looking into adding these entries where no Norwegian entries are present.
 
 
 # References and Data
@@ -70,6 +75,7 @@ To uninstall, go to `documents/dictionaries/` and delete `NB_DE_dict.mobi` as we
 NB > DE translation data.
 - [Norsk Ordbank in Norwegian Bokmål 2005](https://www.nb.no/sprakbanken/show?serial=oai%3Anb.no%3Asbr-5) (Språkbankens ressurskatalog).
 Lists of Norwegian lemmas and inflected forms.
+- [Norwegian stop words](https://www.ranks.nl/stopwords/norwegian) (Ranks NL).
 - [Amazon Kindle Publishing Guidelines](https://s3.amazonaws.com/kindlegen/AmazonKindlePublishingGuidelines.pdf).
 This document describes how to create files that can be converted into `MOBI` files.
 There is also a [section on creating dictionaries](https://s3.amazonaws.com/kindlegen/AmazonKindlePublishingGuidelines.pdf#page=71).
