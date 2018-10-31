@@ -9,7 +9,6 @@ With slight changes, these files can be used to create bilingual dictionaries ba
 1. Get the dictionary source data from [dict.cc's download page](www1.dict.cc/translation_file_request.php) and save it as `data/dict.cc/dict.cc.tsv`.
 
 2. Get the files `lemma.txt` and `fullformsliste.txt` from [Språkbankens ressurskatalog](https://www.nb.no/sprakbanken/show?serial=oai%3Anb.no%3Asbr-5) and save them in `data/spraakbanken/`.
-If, **instead** you would only like to use automatically generated regular inflection forms, open [`transform.py`](/transform.py) and change `inflector = SpraakbankenInflector()` to `inflector = RegularInflector()`.
 
 3. Get a list of Bokmål stop words (for instance via [ranks.nl](https://www.ranks.nl/stopwords/norwegian)) and save it as `data/stopwords/stopwords.txt` (one word per line).
 
@@ -35,7 +34,7 @@ Note that this only allows you to view the dictionary as if it were a regular bo
 You may need to restart the device afterwards (especially if you are updating the dictionary).
 
 
-If you are using Windows, you can execute steps 4 and 5 at once by running [`run.bat`](/run.bat). 
+If you are using Windows, you can execute steps 4 and 5 at once by executing [`run.bat`](/run.bat). 
 
 
 To uninstall, go to `documents/dictionaries/` and delete `NB_DE_dict.mobi` as well as `NB_DE_dict.sdr/`.
@@ -67,6 +66,7 @@ To uninstall, go to `documents/dictionaries/` and delete `NB_DE_dict.mobi` as we
   - [ ] Look into adding Wiktionary data. Specifically from the English or Norwegian versions of Wiktionary.
   - The best (monolingual) Norwegian dictionary I know is https://ordbok.uib.no/, whose database I unfortunately cannot download and use. But maybe there are other good monolingual dictionaries out there that I can use?
   - Written Danish and Bokmål are very similar. If I can find a large DA>EN or DA>DE dictionary, it could be worth looking into adding these entries where no Norwegian entries are present.
+  - What about [Norsk Ordvev](https://www.nb.no/sprakbanken/show?serial=oai%3Anb.no%3Asbr-5) (Norwegian WordNet) for (monolingual) thesaurus-like information?
 
 
 # References and Data
